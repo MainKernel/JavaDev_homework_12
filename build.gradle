@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+
+}
+
+group = 'no.groupId'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.9.1'
+    jupiterVersion = 'junit-jupiter'
+    postgresqlVersion = '42.7.2'
+    flywayVersion = '10.8.1'
+    hibernateVersion = '6.4.4.Final'
+    gsonVersion = '2.10.1'
+    lombokVersion = '1.18.30'
+}
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+
+    testImplementation platform("org.junit:junit-bom:${junitVersion}")
+    testImplementation "org.junit.jupiter:${jupiterVersion}"
+
+    implementation("org.flywaydb:flyway-core:${flywayVersion}")
+    implementation("org.hibernate.orm:hibernate-core:${hibernateVersion}")
+    implementation("org.postgresql:postgresql:${postgresqlVersion}")
+    implementation("com.google.code.gson:gson:${gsonVersion}")
+    runtimeOnly("org.flywaydb:flyway-core:${flywayVersion}")
+
+   implementation("com.h2database:h2:2.2.224")
+    testImplementation("com.h2database:h2:2.2.224")
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
