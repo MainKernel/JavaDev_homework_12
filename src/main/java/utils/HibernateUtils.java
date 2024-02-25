@@ -16,6 +16,7 @@ public class HibernateUtils {
                 .addAnnotatedClass(ClientEntity.class)
                 .addAnnotatedClass(PlanetEntity.class)
                 .buildSessionFactory();
+        FlywayUtils.getInstance().migrate();
     }
     private  final SessionFactory sessionFactory;
 
