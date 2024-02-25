@@ -34,10 +34,8 @@ dependencies {
     implementation("com.google.code.gson:gson:${gsonVersion}")
     runtimeOnly("org.flywaydb:flyway-core:${flywayVersion}")
 
-   implementation("com.h2database:h2:2.2.224")
-    testImplementation("com.h2database:h2:2.2.224")
-
-
+    //Need to work with postgres
+    implementation("org.flywaydb:flyway-database-postgresql:${flywayVersion}")
 }
 
 test {
