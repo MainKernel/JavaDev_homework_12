@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS planet(
 );
 
 CREATE TABLE IF NOT EXISTS ticket(
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     create_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     client_id BIGINT REFERENCES client(id),
     from_planet VARCHAR(200) references planet(id),
