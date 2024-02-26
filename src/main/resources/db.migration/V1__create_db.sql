@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS client(
     id SERIAL PRIMARY KEY,
-    name varchar(200) NOT NULL CHECK (length(name) >= 3 and length(name <= 500))
+    name varchar(200) NOT NULL CHECK (length(name) >= 3 and length(name <= 200))
 );
 
 CREATE TABLE IF NOT EXISTS planet(
