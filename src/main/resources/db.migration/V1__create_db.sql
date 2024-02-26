@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS client(
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name varchar(200) NOT NULL CHECK (length(name) >= 3 and length(name <= 200))
 );
 
