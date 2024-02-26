@@ -9,14 +9,19 @@ import interfaces.dao.Update;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class PlanetCrudService implements Create<PlanetEntity>, Read<PlanetEntity, String>,
-        Update<PlanetEntity>, Delete<PlanetEntity,String> {
+        Update<PlanetEntity>, Delete<PlanetEntity, String> {
     PlanetDao dao = new PlanetDao();
 
     @Override
     public void save(PlanetEntity planetEntity) {
-        dao.save(planetEntity);
+        if (planetValidation(planetEntity)) {
+            dao.save(planetEntity);
+        } else {
+            throw new IllegalArgumentException("invalid credentials");
+        }
     }
 
     @Override
@@ -41,6 +46,22 @@ public class PlanetCrudService implements Create<PlanetEntity>, Read<PlanetEntit
 
     @Override
     public void update(PlanetEntity planetEntity) {
-        dao.update(planetEntity);
+        if (planetValidation(planetEntity)) {
+            dao.update(planetEntity);
+        } else {
+            throw new IllegalArgumentException("Invalid credentials");
+        }
+    }
+
+
+    private boolean planetValidation(@org.jetbrains.annotations.NotNull PlanetEntity planet) {
+
+        Pattern idPattern = Pattern.compile("^[A-Z0-9]+$");
+        int idLength = planet.getId().length();
+
+        boolean idValidation = idPattern.matcher(planet.getId()).matches() & idLength >= 1 & idLength <= 200;
+        boolean nameValidation = !planet.getName().isEmpty() & planet.getName().length() <= 500;
+
+        return idValidation & nameValidation;
     }
 }

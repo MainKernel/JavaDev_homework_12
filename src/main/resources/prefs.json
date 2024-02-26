@@ -1,5 +1,5 @@
 {
-  "db.url": "jdbc:postgresql://0.0.0.0:32768/postgres",
+  "db.url": "jdbc:postgresql://0.0.0.0:32769/postgres",
   "db.user": "postgres",
   "db.password": "password",
   "flyway.migration.location": "db.migration"

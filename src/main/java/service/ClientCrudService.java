@@ -1,11 +1,12 @@
 package service;
 
-import dao.*;
+import dao.ClientDao;
 import entity.ClientEntity;
 import interfaces.dao.Create;
 import interfaces.dao.Delete;
 import interfaces.dao.Read;
 import interfaces.dao.Update;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,11 @@ public class ClientCrudService implements Create<ClientEntity>, Read<ClientEntit
 
     @Override
     public void save(ClientEntity client) {
-        dao.save(client);
+        if (clientValidation(client)) {
+            dao.save(client);
+        } else {
+            throw new IllegalArgumentException("Invalid client name");
+        }
     }
 
     @Override
@@ -42,6 +47,14 @@ public class ClientCrudService implements Create<ClientEntity>, Read<ClientEntit
 
     @Override
     public void update(ClientEntity client) {
-        dao.update(client );
+        if (clientValidation(client)) {
+            dao.update(client);
+        } else {
+            throw new IllegalArgumentException("Invalid client name");
+        }
+    }
+
+    private boolean clientValidation(@NotNull ClientEntity client) {
+        return client.getName().length() >= 3 & client.getName().length() <= 200;
     }
 }

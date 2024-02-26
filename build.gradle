@@ -19,6 +19,7 @@ ext {
     gsonVersion = '2.10.1'
     lombokVersion = '1.18.30'
     h2Version = '2.2.224'
+    jetbrainsAnotationsVersion = '24.1.0'
 }
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
@@ -34,6 +35,8 @@ dependencies {
     implementation("org.hibernate.orm:hibernate-core:${hibernateVersion}")
     implementation("org.postgresql:postgresql:${postgresqlVersion}")
     implementation("com.google.code.gson:gson:${gsonVersion}")
+    implementation("org.jetbrains:annotations:${jetbrainsAnotationsVersion}")
+
 
     //For H2 in memory testing
     runtimeOnly("org.flywaydb:flyway-core:${flywayVersion}")
