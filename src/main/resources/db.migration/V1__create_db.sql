@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS client(
 );
 
 CREATE TABLE IF NOT EXISTS planet(
-    id VARCHAR(200) PRIMARY KEY NOT NULL CHECK (length(name) >= 1 AND length(name) <= 200)  CONSTRAINT id_format_check CHECK (id ~ '^[A-Z0-9]+$'),
+    id VARCHAR(200) PRIMARY KEY NOT NULL CHECK (length(name) >= 1 AND length(name) <= 200)
+        CONSTRAINT id_format_check CHECK (id ~ '^[A-Z0-9]+$'),
     name VARCHAR(500) NOT NULL CHECK (length(name) >= 1 AND length(name) <= 500)
 );
 

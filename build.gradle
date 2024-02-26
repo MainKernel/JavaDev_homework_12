@@ -18,7 +18,7 @@ ext {
     hibernateVersion = '6.4.4.Final'
     gsonVersion = '2.10.1'
     lombokVersion = '1.18.30'
-    h2Version = '2.2.224'
+    h2Version = '2.2.220'
     jetbrainsAnotationsVersion = '24.1.0'
 }
 tasks.withType(JavaCompile).configureEach {

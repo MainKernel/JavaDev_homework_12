@@ -13,7 +13,7 @@ class ClientCrudServiceTest {
         ClientEntity client = new ClientEntity("Johny Silverhand");
         crudService.save(client);
         Long expected = client.getId();
-        Long actual = crudService.findById(client.getId()).orElse(new ClientEntity()).getId();
+        Long actual = crudService.findById(expected).orElse(new ClientEntity()).getId();
 
         Assertions.assertEquals(expected, actual);
     }

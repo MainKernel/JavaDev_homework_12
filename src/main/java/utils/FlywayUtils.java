@@ -9,25 +9,18 @@ import prefs.FlyWayPrefs;
 import javax.sql.DataSource;
 
 public class FlywayUtils {
-    private static final Flyway INSTANCE;
+    private FlywayUtils() {
+        throw new UnsupportedOperationException();
+    }
 
-    static {
-        INSTANCE = Flyway.configure()
+    public static void migrateDatabase() {
+        Flyway flyway = Flyway.configure()
                 .dataSource(DatabasePrefs.getUrl(),
                         DatabasePrefs.getUser(),
                         DatabasePrefs.getPassword())
                 .locations(FlyWayPrefs.getLocation())
                 .load();
-
-    }
-
-    private FlywayUtils() {
-        throw new UnsupportedOperationException();
-    }
-
-
-    public static Flyway getInstance() {
-        return INSTANCE;
+        flyway.migrate();
     }
 }
 

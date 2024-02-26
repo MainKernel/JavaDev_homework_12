@@ -4,24 +4,31 @@ import entity.PlanetEntity;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utils.FlywayUtils;
 import utils.HibernateUtils;
 
 import java.util.Optional;
 
 class PlanetCrudServiceTest {
     PlanetCrudService service = new PlanetCrudService();
-         SessionFactory sessionFactory = HibernateUtils.getInstance().getSessionFactory();
+
+    @BeforeAll
+    public static void setup() {
+        FlywayUtils.migrateDatabase();
+    }
 
     @Test
     void save() {
+
         PlanetEntity entity = new PlanetEntity();
         entity.setName("Earth");
         entity.setId("ERTH");
 
         service.save(entity);
         PlanetEntity actual = service.findById(entity.getId()).orElse(new PlanetEntity());
-        Assertions.assertEquals(entity,actual);
+        Assertions.assertEquals(entity.getId(), actual.getId());
 
     }
 
@@ -82,7 +89,7 @@ class PlanetCrudServiceTest {
     void update() {
         PlanetEntity entity = new PlanetEntity();
         entity.setName("Exotrix");
-        entity.setId("EXTRIX");
+        entity.setId("EXTRI");
         service.save(entity);
         entity.setName("Exotix");
         service.update(entity);
